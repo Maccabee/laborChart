@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const NewWord = ({ setWord }) => {
+const NewWordForm = ({ setWord }) => {
     const [newWord, setNewWord] = useState('');
     const [error, setError] = useState('');
 
@@ -11,20 +11,22 @@ const NewWord = ({ setWord }) => {
         }
         if (newWord.match(/[0-9]/g)) {
             setError('Words must not include numbers');
+            return;
         }
         setWord(newWord);
     };
 
     return (
-        <form>
+        <form onSubmit={submit} className="new-word-form">
             <div>
-                <input value={newWord} onChange={setNewWord} type="text" />
+                <label>Enter a word</label>
+                <input value={newWord} onChange={e => setNewWord(e.target.value)} type="text" />
                 {error && 
-                    <span>{error}</span>}
+                    <span className="error">{error}</span>}
                 </div>
             <button type="submit">Submit</button>            
         </form>
     );
 }
 
-export default NewWord;
+export default NewWordForm;

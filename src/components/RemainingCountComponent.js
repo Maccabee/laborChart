@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RemainingCount = ({ remainingCount }) => {
-    return (<div class="remaining-count">
+    return (<div className="remaining-count">
         {remainingCount} guesses left
     </div>);
 }
