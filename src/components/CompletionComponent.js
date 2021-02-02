@@ -6,11 +6,12 @@ const CompletionComponent = ({ guessedLetters, word, totalWrongGuesses }) => {
     const won = word.split().reduce((acc, val) => acc && guessedLetters.includes(val), true);
     
     if (lost) {
-        return (<div>You ran out of guesses, please play again</div>)
+        return (<div>You ran out of guesses, to play again refresh the page</div>)
     }
     if (won) {
-        return (<div>You won, please play again</div>)
+        return (<div>You won, to play again refresh the page</div>)
     }
-    return '';
-    
+    return '';   
 }
+
+export default CompletionComponent

@@ -4,9 +4,14 @@ const GuessForm = ({ guessedLetters, setGuessedLetters }) => {
     const [letter, setLetter] = useState('');
     const [error, setError] = useState('');
 
-    const submit = () => {
+    const submit = (e) => {
+        e.preventDefault()
         if (letter.length > 1) {
             setError('Please use 1 letter per guess');
+            return;
+        }
+        if (letter.match(/[0-9]/g)) {
+            setError('Numbers aren\'t allowed')            
             return;
         }
         if (guessedLetters.includes(letter)) {
@@ -14,6 +19,7 @@ const GuessForm = ({ guessedLetters, setGuessedLetters }) => {
             return;
         }
         setGuessedLetters([...guessedLetters, letter]);
+        setLetter('');
     };
 
     const onChange = (e) => {
@@ -24,7 +30,7 @@ const GuessForm = ({ guessedLetters, setGuessedLetters }) => {
     return (<form className="guess-form" onSubmit={submit}>
         <div>
             <label>Guess a letter</label>
-            <input value="letter" onChange={onChange} />
+            <input value={letter} onChange={onChange} />
                 {error && 
                     <span className="error">{error}</span>}
         </div>

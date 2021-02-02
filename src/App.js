@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import './App.css';
 
-import { RemainingCount, NewWordForm, GuessedLetters, ActiveWord }from './components';
-import GuessForm from './components/GuessFormComponent';
+import { RemainingCount, NewWordForm, GuessedLetters, ActiveWord, GuessForm, CompletionComponent }from './components';
 
 
 function App () {
@@ -13,7 +12,8 @@ function App () {
   const [word, setCurrentWord] = useState('');
 
   return (<div className="App">
-      <h1>Let's Play Hangman</h1>
+    <h1>Let's Play Hangman</h1>
+    <div className="container">
       {!word && <NewWordForm setWord={setCurrentWord} />}
      
       {word &&
@@ -21,11 +21,10 @@ function App () {
         <RemainingCount remainingCount={totalWrongGuesses - guessedLetters.length} />
         <GuessForm guessedLetters={guessedLetters} setGuessedLetters={setGuessedLetters} />
         <ActiveWord guessedLetters={guessedLetters} word={word} />
-      <GuessedLetters guessedLetters={guessedLetters} />
-      {word.split().reduce((acc, val) => acc && guessedLetters.includes(val), true) && 
-        <div>
+        <GuessedLetters guessedLetters={guessedLetters} />
+        <CompletionComponent guessedLetters={guessedLetters} word={word} totalWrongGuesses={totalWrongGuesses}/>
         </div>}
-        </div>}
+      </div>
     </div>);
 }
 

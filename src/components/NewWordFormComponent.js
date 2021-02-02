@@ -4,7 +4,8 @@ const NewWordForm = ({ setWord }) => {
     const [newWord, setNewWord] = useState('');
     const [error, setError] = useState('');
 
-    const submit = () => {
+    const submit = (e) => {
+        e.preventDefault();
         if (newWord.length === 0) {
             setError('Please enter a word');
             return;
